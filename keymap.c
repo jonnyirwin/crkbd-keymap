@@ -19,25 +19,43 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include QMK_KEYBOARD_H
 #include <stdio.h>
 
+enum layer_names {
+    _QW = 0,
+    _CK,
+    _NUM,
+    _SYM = 8
+};
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-  [0] = LAYOUT_split_3x6_3(
+  [_QW] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
       KC_NO  ,    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                         KC_Y,    KC_U,    KC_I,    KC_O,   KC_P,  KC_NO  ,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-     KC_NO,GUI_T(KC_A),ALT_T(KC_S),CTL_T(KC_D),SFT_T(KC_F),KC_G,                KC_H, SFT_T(KC_J), CTL_T(KC_K), ALT_T(KC_L),GUI_T(KC_SCLN),KC_NO ,
+     KC_NO,ALT_T(KC_A),GUI_T(KC_S),CTL_T(KC_D),SFT_T(KC_F),KC_G,                KC_H, SFT_T(KC_J), CTL_T(KC_K), GUI_T(KC_L),ALT_T(KC_SCLN),KC_NO ,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       KC_NO  ,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                         KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH, KC_NO  ,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          KC_BSPC,   MO(2), KC_SPC ,     KC_ENT,   MO(1), TG(3)
+                                          KC_BSPC,   MO(_SYM), KC_SPC ,     KC_ENT,   MO(_NUM), TO(_CK)
                                       //`--------------------------'  `--------------------------'
+    ),
 
-  ),
+  [_CK] = LAYOUT_split_3x6_3(
+  //,-----------------------------------------------------.                    ,-----------------------------------------------------.
+      KC_NO  ,    KC_Q,    KC_W,    KC_F,    KC_P,    KC_B,                         KC_J,    KC_L,    KC_U,    KC_Y, KC_SCLN,KC_NO  ,
+  //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
+     KC_NO,ALT_T(KC_A),GUI_T(KC_R),CTL_T(KC_S),SFT_T(KC_T),KC_G,                KC_M, SFT_T(KC_N), CTL_T(KC_E), GUI_T(KC_I),ALT_T(KC_O),KC_NO ,
+  //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
+      KC_NO  ,    KC_Z,    KC_X,    KC_C,    KC_D,    KC_V,                         KC_K,    KC_H, KC_COMM,  KC_DOT, KC_SLSH, KC_NO ,
+  //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
+                                          KC_BSPC,   MO(_SYM), KC_SPC ,     KC_ENT,   MO(_NUM), TO(_QW)
+                                      //`--------------------------'  `--------------------------'
+    ),
 
-  [1] = LAYOUT_split_3x6_3(
+  [_NUM] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
       KC_NO  ,    KC_1,    KC_2,    KC_3,    KC_4,  KC_5  ,                         KC_6,    KC_7,    KC_8,    KC_9,  KC_0  , KC_NO  ,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_NO  , KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, KC_NO  ,                      KC_LEFT, KC_DOWN,   KC_UP,KC_RIGHT, KC_NO  , KC_NO  ,
+      KC_NO  , KC_LALT, KC_LGUI, KC_LCTL, KC_LSFT, KC_NO  ,                      KC_LEFT, KC_DOWN,   KC_UP,KC_RIGHT, KC_NO  , KC_NO  ,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       KC_NO  , S(KC_1), S(KC_2), S(KC_3), S(KC_4), S(KC_5),                      S(KC_6), S(KC_7), S(KC_8), KC_MINS, KC_EQL , KC_NO  ,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
@@ -45,29 +63,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                       //`--------------------------'  `--------------------------'
   ),
 
-  [2] = LAYOUT_split_3x6_3(
+  [_SYM] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
       KC_NO  ,S(KC_MINS),KC_MINS,S(KC_EQL),KC_EQL, KC_ESC ,                      S(KC_7),KC_LBRC,S(KC_2),KC_RBRC,S(KC_NUHS), KC_NO ,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_NO  , KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, KC_TAB ,                   S(KC_BSLS), S(KC_9), KC_QUOT, S(KC_0),S(KC_QUOT), KC_NO  ,
+      KC_NO  , KC_LALT, KC_LGUI, KC_LCTL, KC_LSFT, KC_TAB ,                   S(KC_NUBS), S(KC_9), KC_QUOT, S(KC_0),S(KC_QUOT), KC_NO  ,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_NO  , KC_NO  ,KC_NO,S(KC_COMM),S(KC_DOT), KC_NO  ,                     KC_BSLS,S(KC_LBRC),KC_GRV,S(KC_RBRC),KC_NUHS,KC_NO,
+      KC_NO  , KC_NO  ,KC_NO,S(KC_COMM),S(KC_DOT), KC_NO  ,                     KC_NUBS,S(KC_LBRC),KC_GRV,S(KC_RBRC),KC_NUHS,KC_NO,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                           KC_TRNS, KC_TRNS, KC_TRNS,    KC_ESC , KC_WH_D,KC_WH_U 
                                       //`--------------------------'  `--------------------------'
   ),
-
-  [3] = LAYOUT_split_3x6_3(
-  //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-      KC_NO  , KC_NO  , KC_NO  , KC_WH_U  , KC_NO  , KC_NO,                      KC_NO  , KC_NO  , KC_NO  , KC_NO  , KC_ACL2  , KC_NO,
-  //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_NO  , KC_WH_L,KC_BTN1 , KC_BTN3, KC_BTN2, KC_WH_R,                      KC_MS_L, KC_MS_D, KC_MS_U, KC_MS_R, KC_ACL1  , KC_NO,
-  //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_NO  , KC_NO  , KC_NO  , KC_WH_D  , KC_NO  , KC_NO,                      KC_NO  , KC_NO  , KC_NO  , KC_NO  , KC_ACL0  , KC_NO,
-  //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                           KC_NO ,  KC_NO ,  KC_NO ,     KC_NO ,  KC_NO , KC_TRNS
-                                      //`--------------------------'  `--------------------------'
-  )
 };
 
 #ifdef OLED_ENABLE
@@ -78,29 +84,24 @@ oled_rotation_t oled_init_user(oled_rotation_t rotation) {
   return rotation;
 }
 
-#define L_BASE 0
-#define L_LOWER 2
-#define L_RAISE 4
-#define L_ADJUST 8
-
 void oled_render_layer_state(void) {
     oled_write_P(PSTR("Layer: "), false);
-    switch (layer_state) {
-        case L_BASE:
-            oled_write_ln_P(PSTR("Default"), false);
+
+    switch (get_highest_layer(layer_state)) {
+        case _QW:
+            oled_write_ln_P(PSTR("Qwerty"), false);
             break;
-        case L_LOWER:
-            oled_write_ln_P(PSTR("Lower"), false);
+        case _CK:
+            oled_write_ln_P(PSTR("ColemakDH"), false);
             break;
-        case L_RAISE:
-            oled_write_ln_P(PSTR("Raise"), false);
+        case _NUM:
+            oled_write_ln_P(PSTR("Numbers"), false);
             break;
-        case L_ADJUST:
-        case L_ADJUST|L_LOWER:
-        case L_ADJUST|L_RAISE:
-        case L_ADJUST|L_LOWER|L_RAISE:
-            oled_write_ln_P(PSTR("Adjust"), false);
+        case _SYM:
+            oled_write_ln_P(PSTR("Symbols"), false);
             break;
+        default:
+            oled_write_ln_P(PSTR("Undefined"), false);
     }
 }
 
@@ -160,7 +161,7 @@ void oled_render_logo(void) {
 bool oled_task_user(void) {
     if (is_keyboard_master()) {
         oled_render_layer_state();
-        oled_render_keylog();
+        // oled_render_keylog();
     } else {
         oled_render_logo();
     }
