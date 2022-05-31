@@ -23,7 +23,9 @@ enum layer_names {
     _QW = 0,
     _CK,
     _NUM,
-    _SYM = 8
+    _SYM,
+    _WM,
+    _MK
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -35,7 +37,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       KC_NO  ,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                         KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH, KC_NO  ,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          KC_BSPC,   MO(_SYM), KC_SPC ,     KC_ENT,   MO(_NUM), TO(_CK)
+                              KC_NO,LT(_SYM,KC_BSPC),LT(_WM,KC_SPC),   LT(_MK,KC_ENT),   LT(_NUM,KC_ESC), TO(_CK)
                                       //`--------------------------'  `--------------------------'
     ),
 
@@ -47,7 +49,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       KC_NO  ,    KC_Z,    KC_X,    KC_C,    KC_D,    KC_V,                         KC_K,    KC_H, KC_COMM,  KC_DOT, KC_SLSH, KC_NO ,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          KC_BSPC,   MO(_SYM), KC_SPC ,     KC_ENT,   MO(_NUM), TO(_QW)
+                              KC_NO,LT(_SYM,KC_BSPC),LT(_WM,KC_SPC),   LT(_MK,KC_ENT),   LT(_NUM,KC_ESC), TO(_QW)
                                       //`--------------------------'  `--------------------------'
     ),
 
@@ -59,7 +61,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       KC_NO  , S(KC_1), S(KC_2), S(KC_3), S(KC_4), S(KC_5),                      S(KC_6), S(KC_7), S(KC_8), KC_MINS, KC_EQL , KC_NO  ,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          KC_DEL , KC_BTN3, KC_TAB ,    KC_TRNS , KC_TRNS , KC_NO
+                                          KC_NO , KC_BTN3, KC_TAB ,    KC_TRNS , KC_TRNS , KC_NO
                                       //`--------------------------'  `--------------------------'
   ),
 
@@ -67,19 +69,56 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
       KC_NO  ,S(KC_MINS),KC_MINS,S(KC_EQL),KC_EQL, KC_ESC ,                      S(KC_7),KC_LBRC,S(KC_2),KC_RBRC,S(KC_NUHS), KC_NO ,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_NO  , KC_LALT, KC_LGUI, KC_LCTL, KC_LSFT, KC_TAB ,                   S(KC_NUBS), S(KC_9), KC_QUOT, S(KC_0),S(KC_QUOT), KC_NO  ,
+      KC_NO  , KC_LALT, KC_LGUI, KC_LCTL, KC_LSFT, KC_NO   ,                   S(KC_NUBS), S(KC_9), KC_QUOT, S(KC_0),S(KC_QUOT), KC_NO  ,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_NO  , KC_NO  ,KC_NO,S(KC_COMM),S(KC_DOT), KC_NO  ,                     KC_NUBS,S(KC_LBRC),KC_GRV,S(KC_RBRC),KC_NUHS,KC_NO,
+      KC_NO , KC_DEL  ,KC_NO,S(KC_COMM),S(KC_DOT), KC_NO  ,                     KC_NUBS,S(KC_LBRC),KC_GRV,S(KC_RBRC),KC_NUHS,KC_NO,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          KC_TRNS, KC_TRNS, KC_TRNS,    KC_ESC , KC_WH_D,KC_WH_U 
+                                          KC_NO, KC_TRNS, KC_TRNS,    KC_WH_D,KC_WH_U , KC_NO
                                       //`--------------------------'  `--------------------------'
   ),
+
+   [_WM] = LAYOUT_split_3x6_3(
+  //,-----------------------------------------------------.                    ,-----------------------------------------------------.
+      KC_NO  ,G(KC_1) ,G(KC_2) ,G(KC_3) ,G(KC_4) ,G(KC_5) ,                      G(KC_6)  ,G(KC_7) ,G(KC_8) ,G(KC_9) ,G(KC_0) ,KC_NO ,
+  //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
+      KC_NO  ,G(KC_E) ,G(KC_S) ,G(KC_W) ,KC_LSFT ,SGUI(KC_E) ,                      G(KC_J)  ,G(KC_K) ,G(KC_L) ,G(KC_SCLN) ,G(KC_A) ,  KC_NO ,
+  //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
+    KC_NO,SGUI(KC_1),SGUI(KC_2),SGUI(KC_3),SGUI(KC_4),SGUI(KC_5) ,             SGUI(KC_6),SGUI(KC_7),SGUI(KC_8),SGUI(KC_9),SGUI(KC_0),KC_NO ,
+  //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
+                                          KC_NO  , KC_TRNS, KC_TRNS,    G(KC_ENT), G(KC_D),  KC_NO
+                                      //`--------------------------'  `--------------------------'
+  ),
+
+   [_MK] = LAYOUT_split_3x6_3(
+  //,-----------------------------------------------------.                    ,-----------------------------------------------------.
+      KC_NO  ,KC_NO ,KC_NO ,KC_NO ,KC_WH_U ,KC_ACL2 ,                      KC_NO  ,KC_NO ,KC_NO ,KC_NO ,KC_NO , KC_NO ,
+  //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
+      KC_NO  ,KC_NO ,KC_BTN1 ,KC_BTN3 ,KC_BTN2 ,KC_ACL1 ,                      KC_MS_L ,KC_MS_D ,KC_MS_U ,KC_MS_R ,KC_NO ,  KC_NO ,
+  //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
+      KC_NO  ,KC_NO ,KC_NO ,KC_NO ,KC_WH_D ,KC_ACL0 ,                      KC_NO  ,KC_NO ,KC_NO ,KC_NO ,KC_NO , KC_NO ,
+  //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
+                                          KC_NO  , KC_TRNS, KC_TRNS,    KC_TRNS, KC_TRNS,  KC_NO
+                                      //`--------------------------'  `--------------------------'
+  ),
+
+  // Blank layer template
+  //[_LABEL] = LAYOUT_split_3x6_3(
+  //,-----------------------------------------------------.                    ,-----------------------------------------------------.
+  //  KC_NO  ,KC_TRNS ,KC_TRNS ,KC_TRNS ,KC_TRNS ,KC_TRNS ,                    KC_TRNS  ,KC_TRNS ,KC_TRNS ,KC_TRNS ,KC_TRNS ,  KC_NO ,
+  //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
+  //  KC_NO  ,KC_TRNS ,KC_TRNS ,KC_TRNS ,KC_TRNS ,KC_TRNS ,                    KC_TRNS  ,KC_TRNS ,KC_TRNS ,KC_TRNS ,KC_TRNS ,  KC_NO ,
+  //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
+  //  KC_NO  ,KC_TRNS ,KC_TRNS ,KC_TRNS ,KC_TRNS ,KC_TRNS ,                    KC_TRNS  ,KC_TRNS ,KC_TRNS ,KC_TRNS ,KC_TRNS ,  KC_NO ,
+  //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
+  //                                        KC_NO  , KC_TRNS, KC_TRNS,    KC_TRNS, KC_TRNS,  KC_NO
+                                      //`--------------------------'  `--------------------------'
+  //),
 };
 
 #ifdef OLED_ENABLE
 oled_rotation_t oled_init_user(oled_rotation_t rotation) {
   if (!is_keyboard_master()) {
-    return OLED_ROTATION_180;  // flips the display 180 degrees if offhand
+    return OLED_ROTATION_180;
   }
   return rotation;
 }
@@ -89,16 +128,22 @@ void oled_render_layer_state(void) {
 
     switch (get_highest_layer(layer_state)) {
         case _QW:
-            oled_write_ln_P(PSTR("Qwerty"), false);
+            oled_write_ln_P(PSTR("QWERTY"), false);
             break;
         case _CK:
-            oled_write_ln_P(PSTR("ColemakDH"), false);
+            oled_write_ln_P(PSTR("Colemak DHm"), false);
             break;
         case _NUM:
             oled_write_ln_P(PSTR("Numbers"), false);
             break;
         case _SYM:
             oled_write_ln_P(PSTR("Symbols"), false);
+            break;
+        case _WM:
+            oled_write_ln_P(PSTR("Window Manager"), false);
+            break;
+        case _MK:
+            oled_write_ln_P(PSTR("Mouse Keys"), false);
             break;
         default:
             oled_write_ln_P(PSTR("Undefined"), false);
