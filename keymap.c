@@ -42,7 +42,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
       KC_LGUI  ,    KC_1,    KC_2,    KC_3,    KC_4,  KC_5  ,                         KC_6,    KC_7,    KC_8,    KC_9,  KC_0  , KC_LGUI  ,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_LSFT  , CAPSWRD, KC_NO, KC_NO, KC_DOT, KC_NO  ,                      KC_LEFT, KC_DOWN,   KC_UP,KC_RIGHT, KC_NO  , KC_LSFT  ,
+      KC_LSFT  , CAPS_WORD, KC_NO, KC_NO, KC_DOT, KC_NO  ,                      KC_LEFT, KC_DOWN,   KC_UP,KC_RIGHT, KC_NO  , KC_LSFT  ,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       KC_LCTL , S(KC_1), S(KC_2), S(KC_3), S(KC_4), S(KC_5),                      S(KC_6), S(KC_7), S(KC_8), KC_MINS, KC_EQL , KC_LCTL  ,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
@@ -56,7 +56,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       KC_LSFT  , S(KC_6), S(KC_9), KC_QUOT, S(KC_0), S(KC_7),                   S(KC_1), S(KC_COMM), KC_EQL, S(KC_DOT),S(KC_QUOT),KC_LSFT,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_LCTL , S(KC_4) ,S(KC_LBRC),KC_GRV,S(KC_RBRC), S(KC_5),                KC_NUBS,S(KC_NUHS),KC_NO,S(KC_3),KC_SLSH,KC_LCTL,
+      KC_LCTL , S(KC_4) ,S(KC_LBRC),KC_GRV,S(KC_RBRC), S(KC_NUBS),                KC_NUBS,S(KC_NUHS),KC_NO,S(KC_3),KC_SLSH,KC_LCTL,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                     KC_CAPS_LOCK,C(KC_BSPC),KC_DEL,    KC_NO,KC_TRNS, KC_NO
                                       //`--------------------------'  `--------------------------'
