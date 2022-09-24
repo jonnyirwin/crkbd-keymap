@@ -52,11 +52,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_SYM] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-      KC_LGUI  ,S(KC_5),KC_LBRC,S(KC_2),KC_RBRC, S(KC_8) ,                      S(KC_SLSH),S(KC_EQL),KC_MINS,S(KC_MINS),KC_NUHS,KC_LGUI,
+      KC_LGUI  ,S(KC_6),KC_LBRC,S(KC_2),KC_RBRC, S(KC_8) ,                      KC_NUHS,S(KC_EQL),KC_MINS,S(KC_MINS),S(SLASH),KC_LGUI,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_LSFT  , S(KC_6), S(KC_9), KC_QUOT, S(KC_0), S(KC_7),                   S(KC_1), S(KC_COMM), KC_EQL, S(KC_DOT),S(KC_QUOT),KC_LSFT,
+      KC_LSFT  , S(KC_4), S(KC_9), KC_QUOT, S(KC_0), S(KC_7),                   S(KC_NUHS), S(KC_COMM), KC_EQL, S(KC_DOT),S(KC_QUOT),KC_LSFT,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_LCTL , S(KC_4) ,S(KC_LBRC),KC_GRV,S(KC_RBRC), S(KC_NUBS),                KC_NUBS,S(KC_NUHS),KC_NO,S(KC_3),KC_SLSH,KC_LCTL,
+      KC_LCTL , S(KC_5) ,S(KC_LBRC),KC_GRV,S(KC_RBRC), S(KC_NUBS),                KC_NUBS,S(KC_1),KC_DOT,S(KC_3),KC_SLSH,KC_LCTL,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                     KC_CAPS_LOCK,C(KC_BSPC),KC_DEL,    KC_NO,KC_TRNS, KC_NO
                                       //`--------------------------'  `--------------------------'
